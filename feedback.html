@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback - ACCESS - USTP Oroquieta</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    /* Basic layout styling */
+    body {
+      min-height: 100vh;
+      display: flex;
+    }
+    
+    /* Sidebar styling */
+    .sidebar {
+      width: 280px;
+      background-color: #f8f9fa;
+      border-right: 1px solid #dee2e6;
+      padding: 20px;
+    }
+    
+    /* Logo container styling */
+    .sidebar .logo-container {
+      text-align: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    /* Logo image styling */
+    .sidebar .logo {
+      max-width: 120px;
+      height: auto;
+      padding: 10px;
+      border-radius: 50%;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    /* Navigation link styling */
+    .sidebar .nav-link {
+      padding: 10px 15px;
+      margin-bottom: 5px;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
+    
+    .sidebar .nav-link:hover {
+      background-color: #e9ecef;
+    }
+    
+    .sidebar .nav-link.active {
+      background-color: #0d6efd;
+      color: white;
+    }
+    
+    /* Main content area styling */
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    
+    /* Header styling */
+    .page-header {
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #dee2e6;
+      margin-bottom: 30px;
+    }
+    
+    /* Feedback specific styling */
+    .rating-stars {
+      color: #ffc107;
+      font-size: 1.5rem;
+    }
+    
+    .feedback-card {
+      transition: transform 0.3s ease;
+    }
+    
+    .feedback-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    /* Responsive styling for mobile devices */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        order: 2;
+        border-right: none;
+        border-top: 1px solid #dee2e6;
+      }
+      
+      .main-content {
+        order: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar navigation -->
+  <aside class="sidebar d-flex flex-column">
+    <div class="logo-container">
+      <img src="ACCESS.jpg" alt="ACCESS Organization Logo" class="logo">
+      <h5 class="mt-3">ACCESS</h5>
+      <p class="text-muted small">USTP Oroquieta</p>
+    </div>
+    
+    <nav class="nav flex-column mb-auto">
+      <a href="index.html" class="nav-link">
+        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+      </a>
+      <a href="events.html" class="nav-link">
+        <i class="bi bi-calendar-event me-2"></i> Events
+      </a>
+      <a href="attendance.html" class="nav-link">
+        <i class="bi bi-person-check me-2"></i> Attendance
+      </a>
+      <a href="announcements.html" class="nav-link">
+        <i class="bi bi-megaphone me-2"></i> Announcements
+      </a>
+      <a href="gallery.html" class="nav-link">
+        <i class="bi bi-images me-2"></i> Gallery
+      </a>
+      <a href="feedback.html" class="nav-link active">
+        <i class="bi bi-chat-square-text me-2"></i> Feedback
+      </a>
+      <a href="services.html" class="nav-link">
+        <i class="bi bi-gear me-2"></i> Services
+      </a>
+      <a href="reports.html" class="nav-link">
+        <i class="bi bi-file-earmark-bar-graph me-2"></i> Reports
+      </a>
+    </nav>
+    
+    <a href="login.html" class="btn btn-outline-danger mt-4">
+      <i class="bi bi-box-arrow-right me-2"></i> Log Out
+    </a>
+  </aside>
+
+  <!-- Main content area -->
+  <main class="main-content">
+    <!-- Page header -->
+    <header class="page-header d-flex justify-content-between align-items-center">
+      <h1 class="h3">Feedback & Suggestions</h1>
+      <div class="user-info">
+        <span class="text-muted me-2">Welcome, Student</span>
+      </div>
+    </header>
+    
+    <!-- Feedback content -->
+    <div class="container">
+      <div class="row">
+        <!-- Submit feedback form -->
+        <div class="col-lg-8 mb-4">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h2 class="h5 mb-0">Submit Your Feedback</h2>
+            </div>
+            <div class="card-body">
+              <form id="feedbackForm">
+                <div class="mb-3">
+                  <label for="feedbackType" class="form-label">Feedback Type</label>
+                  <select class="form-select" id="feedbackType" required>
+                    <option value="" selected disabled>Select a feedback type</option>
+                    <option value="event">Event Feedback</option>
+                    <option value="workshop">Workshop Feedback</option>
+                    <option value="suggestion">Suggestion</option>
+                    <option value="complaint">Complaint</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="eventSelect" class="form-label">Related Event (if applicable)</label>
+                  <select class="form-select" id="eventSelect">
+                    <option value="" selected>Not applicable</option>
+                    <option value="1">Web Development Workshop (April 27, 2025)</option>
+                    <option value="2">Coding Competition (April 15, 2025)</option>
+                    <option value="3">Tech Talk: AI and the Future (March 28, 2025)</option>
+                    <option value="4">Team Building Activity (February 28, 2025)</option>
+                  </select>
+                </div>
+                
+                <div class="mb-3">
+                  <label class="form-label">Rating</label>
+                  <div class="rating-stars">
+                    <i class="bi bi-star" data-rating="1"></i>
+                    <i class="bi bi-star" data-rating="2"></i>
+                    <i class="bi bi-star" data-rating="3"></i>
+                    <i class="bi bi-star" data-rating="4"></i>
+                    <i class="bi bi-star" data-rating="5"></i>
+                  </div>
+                  <input type="hidden" id="ratingValue" value="0">
+                </div>
+                
+                <div class="mb-3">
+                  <label for="feedbackTitle" class="form-label">Title</label>
+                  <input type="text" class="form-control" id="feedbackTitle" placeholder="Enter a brief title for your feedback" required>
+                </div>
+                
+                <div class="mb-3">
+                  <label for="feedbackMessage" class="form-label">Your Message</label>
+                  <textarea class="form-control" id="feedbackMessage" rows="5" placeholder="Please provide detailed feedback..." required></textarea>
+                </div>
+                
+                <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="anonymousFeedback">
+                  <label class="form-check-label" for="anonymousFeedback">Submit anonymously</label>
+                </div>
+                
+                <div class="text-end">
+                  <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Feedback tips and previous submissions -->
+        <div class="col-lg-4">
+          <!-- Tips for effective feedback -->
+          <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+              <h3 class="h5 mb-0">Tips for Effective Feedback</h3>
+            </div>
+            <div class="card-body">
+              <ul class="mb-0">
+                <li>Be specific with your feedback</li>
+                <li>Include both positives and areas for improvement</li>
+                <li>Suggest solutions when possible</li>
+                <li>Focus on the event or service, not individuals</li>
+                <li>Be constructive and respectful</li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Your previous feedback -->
+          <div class="card">
+            <div class="card-header bg-success text-white">
+              <h3 class="h5 mb-0">Your Previous Feedback</h3>
+            </div>
+            <div class="card-body">
+              <div class="feedback-history">
+                <div class="feedback-card p-2 border-bottom">
+                  <p class="mb-1 fw-bold">Web Development Workshop</p>
+                  <div class="rating-stars small mb-1">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                  </div>
+                  <p class="small text-muted mb-0">Submitted on April 10, 2025</p>
+                </div>
+                
+                <div class="feedback-card p-2">
+                  <p class="mb-1 fw-bold">Suggestion for New Club Activities</p>
+                  <div class="rating-stars small mb-1">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                  </div>
+                  <p class="small text-muted mb-0">Submitted on March 5, 2025</p>
+                </div>
+              </div>
+              <div class="mt-3">
+                <a href="#" class="btn btn-sm btn-outline-success w-100">View All Your Feedback</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap JS Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Simple script for star rating functionality -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const stars = document.querySelectorAll('.rating-stars .bi');
+      const ratingInput = document.getElementById('ratingValue');
+      
+      stars.forEach(star => {
+        star.addEventListener('mouseover', function() {
+          const rating = this.dataset.rating;
+          highlightStars(rating);
+        });
+        
+        star.addEventListener('mouseout', function() {
+          const currentRating = ratingInput.value;
+          highlightStars(currentRating);
+        });
+        
+        star.addEventListener('click', function() {
+          const rating = this.dataset.rating;
+          ratingInput.value = rating;
+          highlightStars(rating);
+        });
+      });
+      
+      function highlightStars(rating) {
+        stars.forEach(star => {
+          if (star.dataset.rating <= rating) {
+            star.classList.remove('bi-star');
+            star.classList.add('bi-star-fill');
+          } else {
+            star.classList.remove('bi-star-fill');
+            star.classList.add('bi-star');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
